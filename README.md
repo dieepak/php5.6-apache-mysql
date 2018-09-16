@@ -1,6 +1,6 @@
 # Add to your project #
 
-Simply, download the repository [https://dieepak.github.io/php7.2-apache-mysql-mongo-redis/](https://dieepak.github.io/php7.2-apache-mysql-mongo-redis/) 
+Simply, download the repository [https://dieepak.github.io/php5.6-apache-mysql-mongo-redis/](https://dieepak.github.io/php5.6-apache-mysql-mongo-redis/) 
 
 Ensure the webserver config on `.docker/config/apache-config` is correct for your project. e.g. `public/index.php` on generic apps.
 
@@ -8,7 +8,7 @@ Note: you may place the files elsewhere in your project. Make sure you modify th
 
 ## Update environment setting in `.env` ##
 
-`COMPOSE_APP_NAME=php-docker`
+`COMPOSE_APP_NAME=regenapps-docker`
 
 `COMPOSE_APP_WORKING_DIR=/var/www/html`
 
@@ -44,9 +44,9 @@ Dependencies:
   * Docker engine v1.13 or higher. Your OS provided package might be a little old, if you encounter problems, do upgrade. See [https://docs.docker.com/engine/installation](https://docs.docker.com/engine/installation)
   * Docker compose v1.12 or higher. See [docs.docker.com/compose/install](https://docs.docker.com/compose/install/)
 
-Once you're done, simply `cd` to your project and run `docker-compose up -d`. This will initialise and start all the containers, then leave them running in the background.
+Once you're done, simply `cd` to your project and execute `docker-compose build`  then run `docker-compose up -d`. This will initialise and start all the containers, then leave them running in the background.
 
-![](https://dieepak.github.io/assets/php-mysql-mongo-redis.png)
+<!-- ![](https://dieepak.github.io/assets/php-mysql-mongo-redis.png) -->
 
 ## Services exposed outside your environment ##
 
@@ -55,8 +55,9 @@ You can access your application via **`localhost`**, if you're running the conta
 
 Service    |  Address outside containers
 ------     |  -------------------
-Webserver  |  [localhost:8080](http://localhost:8080)
-MySQL      |  **host:** `localhost`; **port:** `3306`
+Admin  |  [localhost:8081](http://localhost:8081)
+API  |  [localhost:8082](http://localhost:8082)
+MySQL      |  **host:** `localhost`; **port:** `33061`
 
 ## Hosts within your environment ##
 
@@ -64,14 +65,13 @@ You'll need to configure your application to use any services you enabled:
 
 Service |  Hostname   | Port number
 ------  | ---------   | -----------
-Mongo   | mongo       | 27017 (default)
 MySQL   | mysql       |3306 (default)
-Redis   | redis       |6379 (default)
 
 # Docker compose cheatsheet #
 
 **Note:** you need to cd first to where your docker-compose.yml file lives.
 
+  * Build all containers: `docker-compose build`
   * Start containers in the background: `docker-compose up -d`
   * Start containers on the foreground: `docker-compose up`. You will see a stream of logs for every container running.
   * Stop containers: `docker-compose stop`
