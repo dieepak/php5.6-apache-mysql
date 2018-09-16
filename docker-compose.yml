@@ -24,7 +24,7 @@ services:
       restart: "always"
       container_name: ${COMPOSE_APP_NAME}-php-fpm
       volumes:
-        - .:${COMPOSE_APP_WORKING_DIR}:cached
+        - .:${COMPOSE_APP_WORKING_DIR}
       ports:
         - 8081:81
         - 8082:82
@@ -43,4 +43,3 @@ networks:
     driver: bridge
   backend:
     driver: bridge 
-    
