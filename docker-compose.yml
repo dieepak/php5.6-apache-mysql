@@ -1,0 +1,46 @@
+version: "3.1"
+services:
+
+    mysql:
+      image: mysql:5.6
+      restart: "always"
+      container_name: ${COMPOSE_APP_NAME}-mysql
+      working_dir: ${COMPOSE_APP_WORKING_DIR}
+      volumes:
+        - .:${COMPOSE_APP_WORKING_DIR}
+      environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      ports:
+        - "33061:3306"
+      networks:
+          - frontend
+          - backend
+
+    php:
+      build: .docker/
+      restart: "always"
+      container_name: ${COMPOSE_APP_NAME}-php-fpm
+      volumes:
+        - .:${COMPOSE_APP_WORKING_DIR}:cached
+      ports:
+        - 8081:81
+        - 8082:82
+      links:
+        - mysql:mysql
+      networks:
+        - frontend
+        - backend
+
+volumes:  
+  data-mysql:
+    driver: local
+    
+networks:  
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge 
+
