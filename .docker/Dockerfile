@@ -14,6 +14,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 ENV APPLICATION_ADMIN_DOCUMENT_ROOT /var/www/html/admin/public
+ENV APPLICATION_ADMIN2_DOCUMENT_ROOT /var/www/html/admin2/public
 ENV APPLICATION_API_DOCUMENT_ROOT /var/www/html/api/public
 
 ENV OS_LOCALE="en_US.UTF-8"
@@ -57,6 +58,7 @@ RUN	\
 COPY ./config/apache2.conf ${APACHE_CONF_DIR}/apache2.conf
 COPY ./config/ports.conf ${APACHE_CONF_DIR}/ports.conf
 COPY ./config/apache-admin-config.conf ${APACHE_CONF_DIR}/sites-enabled/apache-admin-config.conf
+COPY ./config/apache-admin2-config.conf ${APACHE_CONF_DIR}/sites-enabled/apache-admin2-config.conf
 COPY ./config/apache-api-config.conf ${APACHE_CONF_DIR}/sites-enabled/apache-api-config.conf
 COPY ./config/php-ini-overrides.ini  ${PHP_CONF_DIR}/apache2/conf.d/php-ini-overrides.ini
 
